@@ -27,19 +27,19 @@ class CatalogController extends Controller
 
             if ($response->successful()) {
                 $recommendations = collect($response->json()['rekomendasi']);
-                $titles = $recommendations->pluck('title');
+                $bookIds = $recommendations->pluck('id');
 
-                // Ambil buku dari database yang judulnya sesuai rekomendasi
-                $booksCollection = Book::whereIn('title', $titles)->get();
+                // Ambil buku dari database berdasarkan ID yang sesuai rekomendasi
+                $booksCollection = Book::whereIn('id', $bookIds)->get();
 
-                // Urutkan sesuai urutan dari API
-                $booksSorted = $titles->map(function ($title) use ($booksCollection) {
-                    return $booksCollection->firstWhere('title', $title);
+                // Urutkan sesuai urutan dari API berdasarkan ID
+                $booksSorted = $bookIds->map(function ($id) use ($booksCollection) {
+                    return $booksCollection->firstWhere('id', $id);
                 })->filter();
 
-                // Buat map skor
+                // Buat map skor berdasarkan ID buku
                 $similarityMap = $recommendations->mapWithKeys(function ($item) {
-                    return [$item['title'] => $item['skor']];
+                    return [$item['id'] => $item['skor']];
                 })->toArray();
 
                 // Manual Pagination
