@@ -22,7 +22,7 @@ class CatalogController extends Controller
             $fastApiUrl = config('app.fastapi_url') . '/recommend';
             $response = Http::post($fastApiUrl, [
                 'keyword' => $request->search_rekom,
-                'top' => 20
+                'top' => 10
             ]);
 
             if ($response->successful()) {
