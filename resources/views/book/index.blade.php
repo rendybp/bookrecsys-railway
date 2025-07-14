@@ -166,11 +166,11 @@
                     @forelse ($books as $book)
                         <div class="book-card-wrapper">
                             <div class="book-card">
-                                @if (isset($similarityMap) && isset($similarityMap[$book->title]))
+                                @if (isset($similarityMap) && isset($similarityMap[$book->id]))
                                     <div class="ai-score-badge" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Skor Rekomendasi AI: {{ number_format($similarityMap[$book->title], 3) }}. Semakin tinggi skor, semakin relevan dengan pencarian Anda.">
+                                        title="Skor Rekomendasi AI: {{ number_format($similarityMap[$book->id], 3) }}. Semakin tinggi skor, semakin relevan dengan pencarian Anda.">
                                         <i class="fas fa-robot me-1"></i>
-                                        {{ number_format($similarityMap[$book->title], 3) }}
+                                        {{ number_format($similarityMap[$book->id], 3) }}
                                     </div>
                                 @endif
 
