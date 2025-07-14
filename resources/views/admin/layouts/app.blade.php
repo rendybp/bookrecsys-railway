@@ -103,10 +103,11 @@
                             <i class="fas fa-external-link-alt"></i> Lihat Katalog
                         </a>
 
-                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                        <form method="POST" action="{{ route('logout') }}" class="d-inline" id="logout-form">
                             @csrf
-                            <button type="submit" class="nav-link btn btn-link text-start w-100 p-0"
-                                    style="color: #ecf0f1 !important; text-decoration: none;">
+                            <button type="button" class="nav-link btn btn-link text-start w-100 p-0"
+                                    style="color: #ecf0f1 !important; text-decoration: none;"
+                                    data-bs-toggle="modal" data-bs-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </button>
                         </form>
@@ -166,7 +167,49 @@
         </div>
     </div>
 
+    <!-- Logout Confirmation Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-danger text-white border-0">
+                    <h5 class="modal-title" id="logoutModalLabel">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Konfirmasi Logout
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <div class="mb-3">
+                        <i class="fas fa-sign-out-alt text-danger" style="font-size: 3rem;"></i>
+                    </div>
+                    <h6 class="mb-3">Apakah Anda yakin ingin keluar?</h6>
+                    <p class="text-muted mb-0">
+                        Anda akan diwajibkan untuk login kembali untuk mengakses halaman ini.
+                    </p>
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>Batal
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="confirmLogout()">
+                        <i class="fas fa-sign-out-alt me-2"></i>Ya, Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function confirmLogout() {
+            // Hide the modal first
+            const modal = bootstrap.Modal.getInstance(document.getElementById('logoutModal'));
+            modal.hide();
+
+            // Submit the logout form
+            document.getElementById('logout-form').submit();
+        }
+    </script>
 </body>
 </html>
