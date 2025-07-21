@@ -25,9 +25,9 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('name', 50)->change();
             $table->string('member_id', 30)->nullable()->change();
-            $table->string('email', 100)->unique()->change();
+            $table->string('email', 100)->change();
             $table->string('no_hp', 15)->nullable()->change();
-            $table->string('username', 30)->unique()->change();
+            $table->string('username', 30)->change();
             $table->string('password', 100)->change();
             // role sudah enum, tidak perlu diubah
         });
@@ -50,9 +50,9 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('name', 255)->change();
             $table->string('member_id', 255)->nullable()->change();
-            $table->string('email', 255)->unique()->change();
+            $table->string('email', 255)->change();
             $table->string('no_hp', 255)->nullable()->change();
-            $table->string('username', 255)->unique()->change();
+            $table->string('username', 255)->change();
             $table->string('password', 255)->change();
         });
     }
